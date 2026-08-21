@@ -29,6 +29,7 @@ import StudentLaunchPage from "./pages/Student/StudentLaunchPage";
 import Settings from "./pages/Settings";
 import SharedDeckPage from "./pages/SharedDeck";
 import ProgressPage from "./pages/Progress";
+import NotFoundPage from "./common/components/NotFoundPage";
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { isAuthenticated, loading, isTeacher, isStudent } = useAuth();
@@ -98,18 +99,18 @@ export default function Home() {
                 </>
               )}
 
-              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>
         </div>
       ) : (
         <Routes>
-          <Route path="/" element={<Landing />} />
+          <Route path="/" element={<Navigate to="/signin" replace />} />
           <Route path="/launch/student-app" element={<StudentLaunchPage />} />
           <Route path="/shared/:token" element={<SharedDeckPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}
     </div>

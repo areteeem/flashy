@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  base: '/decktrack/',
   plugins: [react({ include: /\.[jt]sx?$/ })],
   envPrefix: ['VITE_', 'REACT_APP_'],
   esbuild: {

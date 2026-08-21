@@ -11,12 +11,14 @@ import { installToastLifecycleOptimizations } from "./common/lib/toastLifecycle"
 
 installToastLifecycleOptimizations();
 
+const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
       <SettingsProvider>
         <AuthProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={routerBasename}>
             <App />
             <ToastContainer
               autoClose={2600}

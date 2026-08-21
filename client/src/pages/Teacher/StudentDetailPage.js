@@ -141,7 +141,7 @@ const getStudentAppLoginUrl = (profile, teacherId) => {
   const studentName = String(profile?.display_name || profile?.email || '').trim();
   if (!resolvedTeacherId || !studentId || !studentName) return null;
   return buildStudentAppLaunchUrl({
-    baseUrl: window.location.origin,
+    baseUrl: `${window.location.origin}${import.meta.env.BASE_URL}`,
     teacherId: resolvedTeacherId,
     studentId,
     studentName,
@@ -220,7 +220,7 @@ const StudentDetailPage = () => {
 
   const studentProgressUrl = useMemo(() => {
     if (!detailStudentId) return null;
-    return `${window.location.origin}/students/${encodeURIComponent(detailStudentId)}`;
+    return new URL(`students/${encodeURIComponent(detailStudentId)}`, `${window.location.origin}${import.meta.env.BASE_URL}`).toString();
   }, [detailStudentId]);
 
   const logStudentAction = useCallback(async (action, metadata = {}) => {

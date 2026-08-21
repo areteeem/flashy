@@ -90,7 +90,10 @@ const StudentLaunchPage = () => {
         await applyStudentAppBridge(launchData);
 
         toast.success(`Ready to study, ${launchData.studentName}!`);
-        window.location.replace(launchData.redirectPath || "/");
+        window.location.replace(new URL(
+          String(launchData.redirectPath || "/").replace(/^\//, ""),
+          `${window.location.origin}${import.meta.env.BASE_URL}`,
+        ).toString());
       } catch (err) {
         setError(getFriendlyError(err));
       }

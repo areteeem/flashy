@@ -249,7 +249,10 @@ const Deck = () => {
         await updateDeck(params.id, { share_token: token });
         refetch();
       }
-      const shareUrl = `${window.location.origin}/shared/${token}`;
+      const shareUrl = new URL(
+        `shared/${token}`,
+        `${window.location.origin}${import.meta.env.BASE_URL}`,
+      ).toString();
       await navigator.clipboard.writeText(shareUrl);
       toast.success("Share link copied to clipboard!");
     } catch (err) {

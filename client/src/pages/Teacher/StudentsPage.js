@@ -144,7 +144,7 @@ const getStudentLoginUrl = (profile, teacherId) => {
   if (!resolvedTeacherId || !studentId || !studentName) return null;
 
   return buildStudentAppLaunchUrl({
-    baseUrl: window.location.origin,
+    baseUrl: `${window.location.origin}${import.meta.env.BASE_URL}`,
     teacherId: resolvedTeacherId,
     studentId,
     studentName,
@@ -154,7 +154,7 @@ const getStudentLoginUrl = (profile, teacherId) => {
 const getStudentProfileUrl = (profile) => {
   const profileId = String(profile?.id || "").trim();
   if (!profileId) return null;
-  return `${window.location.origin}/students/${encodeURIComponent(profileId)}`;
+  return new URL(`students/${encodeURIComponent(profileId)}`, `${window.location.origin}${import.meta.env.BASE_URL}`).toString();
 };
 
 const buildStudentAssignmentSummaryMap = (assignments = []) => {

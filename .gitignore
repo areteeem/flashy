@@ -1,3 +1,5 @@
 .env
 /postgres-data
 *.md
+.vercel
+.env.local
